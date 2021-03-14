@@ -2,4 +2,11 @@
     <string name="app_name">Owlize</string>
     <string name="get_started_btn">Get Started!</string>
     <string name="owlLogo">Owl Logo</string>
+    <string name="dashboardTitle">Dashboard</string>
+    <string name="CourseTitle">Course</string>
+    <string name="SemesterTitle">Semester</string>
+    <string name="TaskTitle">Task</string>
+    <string name="semesters">Semesters</string>
+    <string name="courses">Courses</string>
+    <string name="todayTasks">Today\'s Tasks</string>
 </resources>

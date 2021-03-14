@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#104A13"
+    android:background="@color/bkgrndgreen"
     android:foregroundGravity="fill"
     tools:context=".MainActivity">
 
@@ -15,7 +15,8 @@
         android:layout_marginTop="468dp"
         android:text="@string/get_started_btn"
         android:textColor="@color/white"
-        app:backgroundTint="#FF6600"
+        app:backgroundTint="@color/orange"
+        app:cornerRadius="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -29,8 +30,13 @@
         android:layout_marginTop="52dp"
         android:fontFamily="serif"
         android:text="@string/app_name"
-        android:textColor="#FF6600"
+        android:textColor="@color/orange"
         android:textSize="50sp"
+        android:shadowColor="#000000"
+        android:shadowDx="1.5"
+        android:shadowDy="1.3"
+        android:shadowRadius="4.9"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
