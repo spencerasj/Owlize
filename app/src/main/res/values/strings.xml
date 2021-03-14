@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Owlize</string>
+    <string name="get_started_btn">Get Started!</string>
+    <string name="owlLogo">Owl Logo</string>
 </resources>
