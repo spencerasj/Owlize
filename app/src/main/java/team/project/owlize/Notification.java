@@ -1,6 +1,6 @@
 package team.project.owlize;
 
-public class Notification {
+public class Notification implements Remind, Delete, Add, Clear {
 
     private String name;
     private double dueDate;
@@ -31,5 +31,21 @@ public class Notification {
 
     public void setHowOften(String howOften) {
         this.howOften = howOften;
+    }
+
+    public void add() {
+
+    }
+
+    public void clear() {
+
+    }
+
+    public void delete() {
+
+    }
+
+    public void remind() {
+
     }
 }

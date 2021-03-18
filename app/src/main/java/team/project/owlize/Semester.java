@@ -1,6 +1,6 @@
 package team.project.owlize;
 
-public class Semester {
+public class Semester implements Add, Delete, Clear{
 
     private String name;
     private double year;
@@ -22,5 +22,17 @@ public class Semester {
 
     public void setYear(double year) {
         this.year = year;
+    }
+
+    public void add() {
+
+    }
+
+    public void clear() {
+
+    }
+
+    public void delete() {
+
     }
 }

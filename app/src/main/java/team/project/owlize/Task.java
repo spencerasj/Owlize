@@ -1,6 +1,6 @@
 package team.project.owlize;
 
-public class Task {
+public class Task implements Add, Delete, Clear, Remind{
 
     private String name;
     private double dueDate;
@@ -21,5 +21,21 @@ public class Task {
 
     public void setDueDate(double dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public void add() {
+
+    }
+
+    public void clear() {
+
+    }
+
+    public void delete() {
+
+    }
+    
+    public void remind() {
+
     }
 }
