@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 HTTPHelper httpHelper = new HTTPHelper();
                 StringBuffer data = null;
                 data = httpHelper.readHTTP(strAssignmentsURL,
-                        "10706~cymH1yYoCAH6CFifZpG54aJvgz1veW5Oxx4s5TXzf0L6pH4bygrIWXrOqHvkXaNu");
+                        "API KEY HERE");
 
                 result = String.valueOf(data);
 
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
 //            HTTPHelper httpHelper = new HTTPHelper();
 //            StringBuffer data = null;
 //            data = httpHelper.readHTTP("https://byui.instructure.com/api/v1/courses/127496/assignments",
-//                    "10706~cymH1yYoCAH6CFifZpG54aJvgz1veW5Oxx4s5TXzf0L6pH4bygrIWXrOqHvkXaNu");
+//                    "API KEY HERE");
 //
 //            lvItems = (ListView) findViewById(R.id.lvItems);
 //            items = new List<String>();
