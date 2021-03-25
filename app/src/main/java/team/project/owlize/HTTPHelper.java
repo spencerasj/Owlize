@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class HTTPHelper {
+public class HTTPHelper extends{
     public StringBuffer readHTTP(String url, String token) {
         StringBuffer response = new StringBuffer();
         try {
