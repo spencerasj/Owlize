@@ -9,4 +9,7 @@
     <string name="semesters">Semesters</string>
     <string name="courses">Courses</string>
     <string name="todayTasks">Today\'s Tasks</string>
+    <string name="Button">Button</string>
+    <string name="button">Button</string>
+    <string name="AddCourse">Add Course</string>
 </resources>
