@@ -7,6 +7,26 @@
     android:background="@color/bkgrndgreen"
     tools:context=".manual_dashboard">
 
+    <ListView
+        android:id="@+id/lvItems"
+        android:layout_width="343dp"
+        android:layout_height="341dp"
+        android:layout_above="@+id/btnAddItem"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginRight="33dp"
+        android:layout_marginBottom="22dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/btnAddItem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="65dp"
@@ -14,13 +34,16 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginStart="328dp"
-        android:layout_marginLeft="328dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="36dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginRight="18dp"
         android:contentDescription="@string/owlLogo"
         android:src="@drawable/owl3"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/dashboardTitle"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.002" />
 
@@ -48,19 +71,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="375dp"
-        android:layout_height="350dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="37dp"
-        android:background="@color/white"
-        android:padding="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dashboardTitle" />
-
     <EditText
         android:id="@+id/etNewItem"
         android:layout_width="wrap_content"
@@ -74,12 +84,13 @@
         android:layout_marginTop="36dp"
         android:layout_marginEnd="210dp"
         android:layout_marginRight="210dp"
-        android:layout_marginBottom="44dp"
+        android:layout_marginBottom="32dp"
         android:layout_toStartOf="@+id/btnAddItem"
         android:layout_toLeftOf="@+id/btnAddItem"
-        android:hint="Enter a new item"
+        android:hint="@string/Enteranewitem"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerView"
         app:layout_constraintVertical_bias="1.0" />
@@ -96,12 +107,13 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="59dp"
         android:layout_marginRight="59dp"
-        android:layout_marginBottom="46dp"
+        android:layout_marginBottom="32dp"
         android:text="@string/add_item"
         android:textColor="@color/orange"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/etNewItem"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        android:onClick="onAddItem" />/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
