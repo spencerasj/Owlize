@@ -12,4 +12,5 @@
     <string name="Button">Button</string>
     <string name="button">Button</string>
     <string name="AddCourse">Add Course</string>
+    <string name="add_item">Add Item</string>
 </resources>

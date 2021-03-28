@@ -23,10 +23,24 @@ public class MainActivity extends AppCompatActivity {
                 openDashboard();
             }
         });
+
+        // Create button to start manual dashboard
+        Button manualDashBoardBtn = (Button) findViewById(R.id.manualDashBoardBtn);
+        manualDashBoardBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openManualDashboard();
+            }
+        });
     }
 
     private void openDashboard() {
         Intent intent = new Intent(this, Dashboard.class);
         startActivity(intent);
+    }
+
+    private void openManualDashboard() {
+        Intent intent2 = new Intent(this, manual_dashboard.class);
+        startActivity(intent2);
     }
 }
