@@ -10,5 +10,11 @@ public class CourseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
+
+//        editCourse = findViewById(R.id.)
+
+//        public void onClick(View view) {
+
+//        }
     }
 }

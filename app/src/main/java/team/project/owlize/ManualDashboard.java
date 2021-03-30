@@ -1,8 +1,11 @@
 package team.project.owlize;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,25 +17,33 @@ public class ManualDashboard extends AppCompatActivity {
     String course;
     EditText courseName;
     ArrayList<String> courses;
-    RecyclerView recyclerView;
-    ManualAdapter adapter;
+//    private ListView lvItems;
+    TextView test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manual_dashboard);
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new ManualAdapter( courses);
-        recyclerView.setAdapter(adapter);
+        test = (TextView) findViewById(R.id.test);
     }
 
-    public void getCourse(View view) {
-        // get course name from edit text and convert to string
+    public void getCourse(View test) {
+        String itemText = test.getText().toString();
         courseName = (EditText) findViewById(R.id.etNewItem);
         course = courseName.getText().toString();
-        // add to array of courses for recycler
         courses = new ArrayList<String>();
         courses.add(course);
+        test.(courses);
+
+
+//        Intent intent = new Intent(this, AddCourse.class);
+//        startActivity(intent);
+    }
+
+    /** Called when user clicks + button **/
+    public void openAddSubject(View view){
+
+//        Intent intent = new Intent(this, AddCourse.class);
+//        startActivity(intent);
     }
 }
