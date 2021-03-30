@@ -13,4 +13,6 @@
     <string name="button">Button</string>
     <string name="AddCourse">Add Course</string>
     <string name="add_item">Add Item</string>
+    <string name="enter_a_new_item">Enter a new item</string>
+    <string-array name="courses"></string-array>
 </resources>

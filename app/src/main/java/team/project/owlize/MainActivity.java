@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openManualDashboard() {
-        Intent intent2 = new Intent(this, manual_dashboard.class);
+        Intent intent2 = new Intent(this, ManualDashboard.class);
         startActivity(intent2);
     }
 }

@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Owlize">
-        <activity android:name=".manual_dashboard"></activity>
+        <activity android:name=".ManualDashboard"></activity>
         <activity android:name=".TaskActivity" />
         <activity android:name=".SemesterActivity" />
         <activity android:name=".CourseActivity" />
