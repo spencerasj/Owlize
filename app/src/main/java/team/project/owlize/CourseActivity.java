@@ -7,9 +7,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import org.apache.commons.io.FileUtils;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class CourseActivity extends AppCompatActivity {
@@ -26,6 +31,7 @@ public class CourseActivity extends AppCompatActivity {
         courseList = findViewById(R.id.assignmentList);
         courses = new ArrayList<>();
 //        Log.d(TAG, "Received intent with Course");
+        readItems();
         coursesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, courses);
         courseList.setAdapter(coursesAdapter);
         courseList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -49,18 +55,50 @@ public class CourseActivity extends AppCompatActivity {
                     public boolean onItemLongClick(AdapterView<?> adapter, View item, int pos, long id) {
                         courses.remove(pos);
                         coursesAdapter.notifyDataSetChanged();
+                        writeItems();
                         return true;
                     }
                 });
     }
 
     public void addCourse(View view) {
-       course = findViewById(R.id.courseNameEditText);
-       String courseName = course.getText().toString();
-       coursesAdapter.add(courseName);
-       course.setText("");
+        course = findViewById(R.id.courseNameEditText);
+        String courseName = course.getText().toString();
+        if (courseName.length() == 0) {
+            toastMessage("Please enter a course name");
+            return;
+        }
+        coursesAdapter.add(courseName);
+        course.setText("");
+        writeItems();
+    }
+
+    public void toastMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
 //    public void receiveCourse(View view) {
 //
-  }
+
+
+    private void readItems() {
+        File filesDir = getFilesDir();
+        File coursesFile = new File(filesDir, "todo.txt");
+        try {
+            courses = new ArrayList<String>(FileUtils.readLines(coursesFile));
+        } catch (IOException e) {
+            courses = new ArrayList<String>();
+        }
+    }
+
+    private void writeItems() {
+        File filesDir = getFilesDir();
+        File coursesFile = new File(filesDir, "todo.txt");
+        try {
+            FileUtils.writeLines(coursesFile, courses);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+}
