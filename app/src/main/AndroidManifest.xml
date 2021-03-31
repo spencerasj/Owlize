@@ -13,9 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Owlize">
-        <activity android:name=".ManualDashboard"></activity>
-        <activity android:name=".TaskActivity" />
-        <activity android:name=".SemesterActivity" />
+        <activity android:name=".AddCourse"></activity>
+        <activity android:name=".ManualDashboard" />
+        <activity android:name=".AssignmentActivity" />
         <activity android:name=".CourseActivity" />
         <activity android:name=".Dashboard" />
         <activity android:name=".MainActivity">

@@ -1,51 +1,65 @@
 package team.project.owlize;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class ManualAdapter extends RecyclerView.Adapter<ManualAdapter.ManualViewHolder> {
+    private Activity activity;
+    ArrayList<String> assignmentListGroup;
+    ArrayList<String> courseListGroup;
+    String assignments;
 
-    private ArrayList<String> courses;
-    String courseName;
-TextView textView;
 
-    public ManualAdapter(ArrayList<String> courses) {
-        this.courses = courses;
+    public ManualAdapter(Activity activity, ArrayList<String> assignmentListGroup, ArrayList<String> courseListGroup) {
+        this.activity = activity;
+        this.assignmentListGroup = assignmentListGroup;
+        this.courseListGroup = courseListGroup;
     }
 
     @NonNull
     @Override
     public ManualViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        textView = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.list_row_group, parent, false);
-        return new ManualViewHolder(textView);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_row_group, parent, false);
+        return new ManualAdapter.ManualViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ManualViewHolder holder, int position) {
-        courseName = courses.get(position);
-        holder.courseName.setText(courseName);
+        holder.tvName.setText(assignmentListGroup.get(position));
+        ArrayList<String> arrayListMember = new ArrayList<>();
+//SOME CONTENT HERE!!!!!!!!!!!!!!!!!!!!!
+        MemberAdp adapterMember = new MemberAdp(arrayListMember);
+
+        LinearLayoutManager layoutManagerMember = new LinearLayoutManager(activity);
+
+        holder.rvMember.setLayoutManager(layoutManagerMember);
+
+        holder.rvMember.setAdapter(adapterMember);
     }
 
 
     @Override
     public int getItemCount() {
-        return courses.size();
+        return assignmentListGroup.size();
     }
 
-    public static class ManualViewHolder extends RecyclerView.ViewHolder {
-        TextView courseName;
-        RecyclerView manualRecycler;
+    public class ManualViewHolder extends RecyclerView.ViewHolder {
+        TextView tvName;
+        RecyclerView rvMember;
 
-        public ManualViewHolder(@NonNull TextView itemView) {
+        public ManualViewHolder(@NonNull View itemView) {
             super(itemView);
-            courseName = itemView.findViewById(R.id.tv_name);
-            manualRecycler = itemView.findViewById(R.id.rv_member);
+            tvName = itemView.findViewById(R.id.tv_name);
+            rvMember = itemView.findViewById(R.id.rv_member);
         }
     }
 }

@@ -2,13 +2,14 @@ package team.project.owlize;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    Button button;
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +38,12 @@ public class MainActivity extends AppCompatActivity {
     private void openDashboard() {
         Intent intent = new Intent(this, Dashboard.class);
         startActivity(intent);
+        Log.d(TAG, "Send openDashboard intent");
     }
 
     private void openManualDashboard() {
-        Intent intent2 = new Intent(this, ManualDashboard.class);
+        Intent intent2 = new Intent(this, CourseActivity.class);
         startActivity(intent2);
+        Log.d(TAG, "Send intent to CourseActivity");
     }
 }
