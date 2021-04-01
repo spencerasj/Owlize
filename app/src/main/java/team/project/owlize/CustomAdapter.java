@@ -51,7 +51,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         holder.tvName.setText(arrayListGroup.get(position));
         ArrayList<String> arrayListMember = new ArrayList<>();
 
-        String url = "https://byui.instructure.com:443/api/v1/courses/"+courseListGroup.get(position)+"/assignments?bucket=future";
+        String url = "https://byui.instructure.com:443/api/v1/courses/"+courseListGroup.get(position)+"/assignments?bucket=future&order_by=name";
         assignments = getJSON(url);
         Log.d("test", assignments);
         Gson gson = new Gson();

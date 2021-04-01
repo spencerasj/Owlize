@@ -1,5 +1,7 @@
 package team.project.owlize;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -31,8 +33,17 @@ public class Dashboard extends AppCompatActivity {
     LinearLayoutManager layoutManagerGroup;
     CustomAdapter customAdapter;
 
+    public static final String MyPREFERENCES = "MyPrefs" ;
+    public static final String Token = "tokenKey";
+
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        sharedPreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+
+        String token = sharedPreferences.getString(Token, "");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
@@ -41,7 +52,7 @@ public class Dashboard extends AppCompatActivity {
             StrictMode.setThreadPolicy(policy);
         }
         String url = "https://byui.instructure.com:443/api/v1/courses?enrollment_state=active";
-        courses = getJSON(url);
+        courses = getJSON(url, token);
         Log.d("test", courses);
 
         rvGroup = findViewById(R.id.recyclerView);
@@ -77,13 +88,13 @@ public class Dashboard extends AppCompatActivity {
 //        startActivity(intent);
    }
 
-    public static String getJSON(String url) {
+    public static String getJSON(String url, String token) {
         HttpURLConnection con = null;
 
         try {
             URL u = new URL(url);
             con = (HttpURLConnection) u.openConnection();
-            con.setRequestProperty("Authorization","Bearer "+"10706~cymH1yYoCAH6CFifZpG54aJvgz1veW5Oxx4s5TXzf0L6pH4bygrIWXrOqHvkXaNu");
+            con.setRequestProperty("Authorization","Bearer "+token);
 
             con.setRequestProperty("Content-Type","application/json");
             con.setRequestMethod("GET");

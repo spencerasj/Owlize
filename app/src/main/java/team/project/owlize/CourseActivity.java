@@ -32,17 +32,14 @@ public class CourseActivity extends AppCompatActivity {
         courses = new ArrayList<>();
 //        Log.d(TAG, "Received intent with Course");
         readItems();
-        coursesAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, courses);
+        coursesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, courses);
         courseList.setAdapter(coursesAdapter);
-        courseList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long id) {
-                String course = adapterView.getItemAtPosition(i).toString();
-                Intent assignIntent = new Intent(CourseActivity.this, AssignmentActivity.class);
-                assignIntent.putExtra("CourseListItem", course);
-                startActivity(assignIntent);
+        courseList.setOnItemClickListener((adapterView, view, i, id) -> {
+            String course = adapterView.getItemAtPosition(i).toString();
+            Intent assignIntent = new Intent(CourseActivity.this, AssignmentActivity.class);
+            assignIntent.putExtra("CourseListItem", course);
+            startActivity(assignIntent);
 
-            }
         });
 //        Log.d(TAG, "Received intent with favScripture");
         longClickDelete();
@@ -50,14 +47,14 @@ public class CourseActivity extends AppCompatActivity {
 
     private void longClickDelete() {
         courseList.setOnItemLongClickListener(
-                new AdapterView.OnItemLongClickListener() {
-                    @Override
-                    public boolean onItemLongClick(AdapterView<?> adapter, View item, int pos, long id) {
-                        courses.remove(pos);
-                        coursesAdapter.notifyDataSetChanged();
-                        writeItems();
-                        return true;
-                    }
+                (adapter, item, pos, id) -> {
+                    String courseName = adapter.getItemAtPosition(pos).toString();
+                    courses.remove(pos);
+                    coursesAdapter.notifyDataSetChanged();
+                    writeItems();
+                    deleteCourse(courseName);
+
+                    return true;
                 });
     }
 
@@ -80,6 +77,15 @@ public class CourseActivity extends AppCompatActivity {
 //    public void receiveCourse(View view) {
 //
 
+    private void deleteCourse(String courseName) {
+        File filesDir = getFilesDir();
+        File coursesFile = new File(filesDir, courseName+".txt");
+        try {
+            FileUtils.forceDelete(coursesFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void readItems() {
         File filesDir = getFilesDir();
@@ -87,7 +93,7 @@ public class CourseActivity extends AppCompatActivity {
         try {
             courses = new ArrayList<String>(FileUtils.readLines(coursesFile));
         } catch (IOException e) {
-            courses = new ArrayList<String>();
+            courses = new ArrayList<>();
         }
     }
 
