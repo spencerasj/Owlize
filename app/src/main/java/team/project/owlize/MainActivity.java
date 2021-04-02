@@ -8,6 +8,7 @@ import android.text.InputType;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -19,7 +20,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String Token = "tokenKey";
 
     SharedPreferences sharedpreferences;
-
+    TextView tv_canvasToken;
+    Button btn_getStarted;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +37,13 @@ public class MainActivity extends AppCompatActivity {
         manualDashBoardBtn.setOnClickListener(v -> openManualDashboard());
 
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        tv_canvasToken = findViewById(R.id.tv_canvasToken);
+        btn_getStarted = findViewById(R.id.getStartedBtn);
+        String savedToken = sharedpreferences.getString(Token, "");
+        if (!savedToken.isEmpty()) {
+            tv_canvasToken.setText("");
+            btn_getStarted.setText("Canvas Assignment Sync");
+        }
     }
 
     private void openDashboard() {

@@ -92,7 +92,8 @@ public class AssignmentActivity extends AppCompatActivity {
 // Set up the buttons
         builder.setPositiveButton("OK", (dialog, which) -> {
 //                String m_Text = input.getText().toString();
-            String assignmentData = assignmentNameBox.getText().toString() + ";" + dueDateBox.getText().toString();
+            String assignmentData = "Due: " + dueDateBox.getText().toString() + " | " + assignmentNameBox.getText().toString();
+//            String assignmentData = assignmentNameBox.getText().toString() + ";" + dueDateBox.getText().toString();
 //                String courseName = assignmentNameBox.getText().toString();
             assignmentsAdapter.add(assignmentData);
             assignmentNameBox.setText("");
