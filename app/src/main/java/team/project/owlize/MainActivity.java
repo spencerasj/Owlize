@@ -1,8 +1,11 @@
 package team.project.owlize;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -13,6 +16,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -32,6 +37,11 @@ public class MainActivity extends AppCompatActivity {
         Button getStartedBtn = (Button) findViewById(R.id.getStartedBtn);
         getStartedBtn.setOnClickListener(v -> openDashboard());
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("My Notification", "My Notification", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
         // Create button to start manual dashboard
         Button manualDashBoardBtn = (Button) findViewById(R.id.manualDashBoardBtn);
         manualDashBoardBtn.setOnClickListener(v -> openManualDashboard());
@@ -44,7 +54,10 @@ public class MainActivity extends AppCompatActivity {
             tv_canvasToken.setText("");
             btn_getStarted.setText("Canvas Assignment Sync");
         }
+
+
     }
+
 
     private void openDashboard() {
 
@@ -83,8 +96,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openManualDashboard() {
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, "My Notification");
+        builder.setContentTitle("Reminder Notification");
+        builder.setContentText("You have assignments due soon");
+        builder.setSmallIcon(R.drawable.owl3);
+        builder.setAutoCancel(true);
+        NotificationManagerCompat managerCompat = NotificationManagerCompat.from(MainActivity.this);
+        managerCompat.notify(1, builder.build());
+
         Intent intent2 = new Intent(this, CourseActivity.class);
         startActivity(intent2);
+
         Log.d(TAG, "Send intent to CourseActivity");
     }
 }
