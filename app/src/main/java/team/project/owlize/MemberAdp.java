@@ -14,9 +14,12 @@ import java.util.ArrayList;
 public class MemberAdp extends RecyclerView.Adapter<MemberAdp.ViewHolder> {
 
     ArrayList<String> arrayListMember;
+    ArrayList<String> arrayListDate;
 
-    public MemberAdp(ArrayList<String> arrayListMember) {
+    public MemberAdp(ArrayList<String> arrayListMember, ArrayList<String> arrayListDate) {
+
         this.arrayListMember = arrayListMember;
+        this.arrayListDate = arrayListDate;
     }
 
     @NonNull
@@ -33,6 +36,7 @@ public class MemberAdp extends RecyclerView.Adapter<MemberAdp.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         holder.tvName.setText(arrayListMember.get(position));
+        holder.tvDue.setText(arrayListDate.get(position));
 
     }
 
@@ -44,11 +48,13 @@ public class MemberAdp extends RecyclerView.Adapter<MemberAdp.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvName;
+        TextView tvDue;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvName = itemView.findViewById(R.id.tv_name);
+            tvDue = itemView.findViewById(R.id.tv_DueDate);
 
         }
     }

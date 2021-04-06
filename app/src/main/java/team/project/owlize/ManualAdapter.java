@@ -37,7 +37,7 @@ public class ManualAdapter extends RecyclerView.Adapter<ManualAdapter.ManualView
         holder.tvName.setText(assignmentListGroup.get(position));
         ArrayList<String> arrayListMember = new ArrayList<>();
 //SOME CONTENT HERE!!!!!!!!!!!!!!!!!!!!!
-        MemberAdp adapterMember = new MemberAdp(arrayListMember);
+        MemberAdp adapterMember = new MemberAdp(arrayListMember, null);
 
         LinearLayoutManager layoutManagerMember = new LinearLayoutManager(activity);
 
