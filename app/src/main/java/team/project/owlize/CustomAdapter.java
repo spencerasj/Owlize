@@ -21,7 +21,11 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder>{
@@ -50,20 +54,45 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tvName.setText(arrayListGroup.get(position));
         ArrayList<String> arrayListMember = new ArrayList<>();
+        ArrayList<String> arrayListDate = new ArrayList<>();
 
-        String url = "https://byui.instructure.com:443/api/v1/courses/"+courseListGroup.get(position)+"/assignments?bucket=future&order_by=name";
+        String url = "https://byui.instructure.com:443/api/v1/courses/"+courseListGroup.get(position)+"/assignments?bucket=future&order_by=due_at";
         assignments = getJSON(url);
         Log.d("test", assignments);
         Gson gson = new Gson();
         Type type = new TypeToken<List<AssignmentModel>>(){}.getType();
         List<AssignmentModel> assignmentList = gson.fromJson(assignments, type);
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Format f = new SimpleDateFormat("MM/dd/yy");
+
         for (AssignmentModel assignment : assignmentList) {
 
             arrayListMember.add(assignment.name);
 
+//            arrayListDate.add(assignment.due_at);
+
+            try {
+                if (assignment.due_at != null) {
+                    Date newDate = sdf.parse(assignment.due_at.substring(0,10));
+                    String test = f.format(newDate);
+                    arrayListDate.add(test);
+                } else {
+                    arrayListDate.add("No Due Date");
+                }
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
+
+
         }
-        MemberAdp adapterMember = new MemberAdp(arrayListMember);
+        if (arrayListDate.isEmpty()) {
+            arrayListDate.clear();
+        }
+        MemberAdp adapterMember = new MemberAdp(arrayListMember, arrayListDate);
 
         LinearLayoutManager layoutManagerMember = new LinearLayoutManager(activity);
 
@@ -120,11 +149,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvName;
+        TextView tvDue;
         RecyclerView rvMember;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tv_name);
+            tvDue = itemView.findViewById(R.id.tv_DueDate);
             rvMember = itemView.findViewById(R.id.rv_member);
         }
     }

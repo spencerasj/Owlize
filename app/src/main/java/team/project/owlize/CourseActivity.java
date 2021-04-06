@@ -1,11 +1,14 @@
 package team.project.owlize;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -24,36 +27,81 @@ public class CourseActivity extends AppCompatActivity {
     private ListView courseList;
     EditText course;
 
+    DBHelper myDB;
+    private String selectedSubject;
+    private int selectedID;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course);
+
+        myDB = new DBHelper(this);
+
         courseList = findViewById(R.id.assignmentList);
         courses = new ArrayList<>();
-//        Log.d(TAG, "Received intent with Course");
-        readItems();
-        coursesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, courses);
-        courseList.setAdapter(coursesAdapter);
-        courseList.setOnItemClickListener((adapterView, view, i, id) -> {
-            String course = adapterView.getItemAtPosition(i).toString();
-            Intent assignIntent = new Intent(CourseActivity.this, AssignmentActivity.class);
-            assignIntent.putExtra("CourseListItem", course);
-            startActivity(assignIntent);
 
-        });
+        populateCourseList();
+//        Log.d(TAG, "Received intent with Course");
+//        readItems();
+//        coursesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, courses);
+//        courseList.setAdapter(coursesAdapter);
+//        courseList.setOnItemClickListener((adapterView, view, i, id) -> {
+//            String course = adapterView.getItemAtPosition(i).toString();
+//            Intent assignIntent = new Intent(CourseActivity.this, AssignmentActivity.class);
+//            assignIntent.putExtra("CourseListItem", course);
+//            startActivity(assignIntent);
+//
+//        });
 //        Log.d(TAG, "Received intent with favScripture");
         longClickDelete();
     }
+
+    private void populateCourseList() {
+        Log.d(TAG, "populateSubjectList: Displaying subjects in the ListView.");
+        Cursor subjects = myDB.getAllData();
+        ArrayList<String> listSubjects = new ArrayList<>();
+        while (subjects.moveToNext()){
+            listSubjects.add(subjects.getString(1));
+        }
+        ListAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_selectable_list_item,listSubjects);
+        courseList.setAdapter(adapter);
+
+        //set an onItemClickListener to the ListView
+        courseList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String subject = adapterView.getItemAtPosition(i).toString();
+                Log.d(TAG, "onItemClick: You Clicked on " + subject);
+
+                Cursor data = myDB.getItemID(subject); //get the id associated with that name
+                int itemID = -1;
+                while (data.moveToNext()){
+                    itemID = data.getInt(0);
+                }
+                if (itemID > -1){
+                    Log.d(TAG,"onItemClick: The ID is: " + itemID);
+                    Intent taskOverview = new Intent(CourseActivity.this, AssignmentActivity.class);
+                    taskOverview.putExtra("id",itemID);
+                    taskOverview.putExtra("name",subject);
+                    startActivity(taskOverview);
+                } else {
+                    toastMessage("No ID associated with that name");
+                }
+            }
+        });
+    }
+
+
 
     private void longClickDelete() {
         courseList.setOnItemLongClickListener(
                 (adapter, item, pos, id) -> {
                     String courseName = adapter.getItemAtPosition(pos).toString();
-                    courses.remove(pos);
-                    coursesAdapter.notifyDataSetChanged();
-                    writeItems();
-                    deleteCourse(courseName);
-
+                    Integer courseID = myDB.getCoursesId(courseName);
+                    myDB.deleteCourse(courseID.toString());
+                    populateCourseList();
                     return true;
                 });
     }
@@ -65,9 +113,10 @@ public class CourseActivity extends AppCompatActivity {
             toastMessage("Please enter a course name");
             return;
         }
-        coursesAdapter.add(courseName);
+
+        AddData(courseName);
+        populateCourseList();
         course.setText("");
-        writeItems();
     }
 
     public void toastMessage(String message) {
@@ -77,34 +126,8 @@ public class CourseActivity extends AppCompatActivity {
 //    public void receiveCourse(View view) {
 //
 
-    private void deleteCourse(String courseName) {
-        File filesDir = getFilesDir();
-        File coursesFile = new File(filesDir, courseName+".txt");
-        try {
-            FileUtils.forceDelete(coursesFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void readItems() {
-        File filesDir = getFilesDir();
-        File coursesFile = new File(filesDir, "todo.txt");
-        try {
-            courses = new ArrayList<String>(FileUtils.readLines(coursesFile));
-        } catch (IOException e) {
-            courses = new ArrayList<>();
-        }
-    }
-
-    private void writeItems() {
-        File filesDir = getFilesDir();
-        File coursesFile = new File(filesDir, "todo.txt");
-        try {
-            FileUtils.writeLines(coursesFile, courses);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void AddData(String subjEntry){
+        myDB.insertCourse(subjEntry);
     }
 
 

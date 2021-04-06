@@ -73,21 +73,8 @@ public class Dashboard extends AppCompatActivity {
         rvGroup.setLayoutManager(layoutManagerGroup);
         rvGroup.setAdapter(customAdapter);
 
-
-           // Create button to Add Content
-//        Button addContentButton = (Button) findViewById(R.id.addContentBtn);
-//        addContentButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                openSemesterActivity();
-//            }
-//        });
-//    }
-//    private void openSemesterActivity() {
-//        Intent intent = new Intent(this, SemesterActivity.class);
-//        startActivity(intent);
    }
-
+    //retrieving API data and formatting how the lines are setup
     public static String getJSON(String url, String token) {
         HttpURLConnection con = null;
 
