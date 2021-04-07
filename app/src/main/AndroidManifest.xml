@@ -14,7 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Owlize">
         <activity android:name=".AddCourse"></activity>
-        <activity android:name=".ManualDashboard" />
         <activity android:name=".AssignmentActivity" />
         <activity android:name=".CourseActivity" />
         <activity android:name=".Dashboard" />

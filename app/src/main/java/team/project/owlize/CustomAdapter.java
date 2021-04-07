@@ -28,6 +28,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * used to create the RecyclerView for Canvas API
+ */
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder>{
 
     private Activity activity;
@@ -41,6 +44,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         this.courseListGroup = courseListGroup;
     }
 
+    /**
+     * Inflates the list with content from Canvas API
+     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -50,6 +56,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         return new CustomAdapter.ViewHolder(view);
     }
 
+    /**
+     * Binds information to the RecyclerView
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.tvName.setText(arrayListGroup.get(position));
@@ -70,8 +79,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
             arrayListMember.add(assignment.name);
 
-//            arrayListDate.add(assignment.due_at);
-
             try {
                 if (assignment.due_at != null) {
                     Date newDate = sdf.parse(assignment.due_at.substring(0,10));
@@ -84,8 +91,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
-
 
 
         }
@@ -103,6 +108,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
 
     }
 
+    /**
+     * gets JSON string information via HTTP URL Connection
+     */
     public static String getJSON(String url) {
         HttpURLConnection con = null;
 
@@ -141,17 +149,26 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         return null;
     }
 
+    /**
+     * Counts the items in array list group
+     */
     @Override
     public int getItemCount() {
         return arrayListGroup.size();
     }
 
+    /**
+     * creating the RecyclerView and the layout for list items
+     */
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvName;
         TextView tvDue;
         RecyclerView rvMember;
 
+        /**
+         * gets the data from the IDs
+         */
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tv_name);

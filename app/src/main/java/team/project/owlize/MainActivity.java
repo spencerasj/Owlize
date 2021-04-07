@@ -19,6 +19,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+/**
+ * MainActivity directs the user to eithe the manual dashboard or the API dashboards
+ */
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     public static final String MyPREFERENCES = "MyPrefs" ;
@@ -28,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
     TextView tv_canvasToken;
     Button btn_getStarted;
 
+    /**
+     * onCreate provides the splash page, and interacts with the user to either access Canvas API dashboard or manual dashboard. Also sets API token
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +64,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
+    /**
+     * openDashboard will display a prompt asking for a Canvas token ID, after which, the user will be taken to the API view of Canvas
+     */
     private void openDashboard() {
 
         String savedToken = sharedpreferences.getString(Token, "");
@@ -95,6 +103,9 @@ public class MainActivity extends AppCompatActivity {
         Log.d(TAG, "Send openDashboard intent");
     }
 
+    /**
+     * openManualDashboard opens the manual dashboard so that users are able to track their own courses and assignments with due dates
+     */
     private void openManualDashboard() {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, "My Notification");
         builder.setContentTitle("Reminder Notification");

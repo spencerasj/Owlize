@@ -23,7 +23,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Dashboard for Canvas API information
+ */
 public class Dashboard extends AppCompatActivity {
 
     String courses = null;
@@ -38,6 +40,9 @@ public class Dashboard extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
 
+    /**
+     * populates the data from Canvas via API
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -74,6 +79,7 @@ public class Dashboard extends AppCompatActivity {
         rvGroup.setAdapter(customAdapter);
 
    }
+
     //retrieving API data and formatting how the lines are setup
     public static String getJSON(String url, String token) {
         HttpURLConnection con = null;

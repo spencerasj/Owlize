@@ -3,24 +3,10 @@
     <string name="get_started_btn">Enter Canvas Token</string>
     <string name="owlLogo">Owl Logo</string>
     <string name="dashboardTitle">Dashboard</string>
-    <string name="CourseTitle">Course</string>
-    <string name="SemesterTitle">Semester</string>
-    <string name="TaskTitle">Task</string>
-    <string name="semesters">Semesters</string>
     <string name="courses">Courses</string>
-    <string name="todayTasks">Today\'s Tasks</string>
-    <string name="Button">Button</string>
-    <string name="button">Button</string>
     <string name="AddCourse">Add Course</string>
-    <string name="add_item">Add Item</string>
-    <string name="Enteranewitem">Enter a new item</string>
     <string name="manual_dashboard">Manual Assignment Tracking</string>
-    <string name="add_task">Add Task</string>
-    <string name="add_new_course">Add New Course</string>
-    <string name="assignment">Assignment</string>
     <string name="assignments">Assignments</string>
-    <string name="AddAssignment">Add</string>
-    <string name="Add">Add</string>
     <string name="add_assignment">Add Assignment</string>
     <string name="canvasToken">Want to retrieve assignments from Canvas?</string>
 </resources>

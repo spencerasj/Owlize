@@ -8,19 +8,23 @@ import android.widget.TextView;
 
 import java.util.List;
 
+/**
+ * adapter used for the assignment class
+ */
 public class AssignmentAdapter extends BaseAdapter {
 
     private Context mContext;
     private List<Assignment> mTaskList;
 
     // Constructor
-
-
     public AssignmentAdapter(Context mContext, List<Assignment> mTaskList) {
         this.mContext = mContext;
         this.mTaskList = mTaskList;
     }
 
+    /**
+     * List of getters for the assignment adapter
+     */
     @Override
     public int getCount() {
         return mTaskList.size();

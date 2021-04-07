@@ -28,6 +28,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+/**
+ * Handles the manual dashboard's activity data
+ */
 public class AssignmentActivity extends AppCompatActivity {
     private ArrayList<String> assignments;
     private ArrayAdapter<String> assignmentsAdapter;
@@ -46,7 +50,9 @@ public class AssignmentActivity extends AppCompatActivity {
     int taskCnt;
 
 
-
+    /**
+     * gets the data from the view and gets the database helper and creates an intent
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +79,10 @@ public class AssignmentActivity extends AppCompatActivity {
 
         longClickDelete();
     }
-    //Populate the data for Course Assignments and format it
+
+    /**
+     * Populate the data for Course Assignments and format it
+     */
     private void populateData() {
         List<Assignment> mAssignmentList = new ArrayList<>();
         Cursor assignments = myDB.getAssignmentData(selectedID);
@@ -105,7 +114,9 @@ public class AssignmentActivity extends AppCompatActivity {
 
         }
 
-        //Init adapter
+        /**
+         * Init adapter
+         */
         AssignmentAdapter adapter = new AssignmentAdapter(getApplicationContext(), mAssignmentList);
         assignmentList.setAdapter(adapter);
 
@@ -123,6 +134,7 @@ public class AssignmentActivity extends AppCompatActivity {
         });
 
     }
+
     //Long click deletes record
     private void longClickDelete() {
         assignmentList.setOnItemLongClickListener(
@@ -137,6 +149,7 @@ public class AssignmentActivity extends AppCompatActivity {
                     return true;
                 });
     }
+
     // Adds assignments and prompts a date selector
     public void addAssignment(View view) {
         final Calendar myCalendar = Calendar.getInstance();
@@ -196,6 +209,9 @@ public class AssignmentActivity extends AppCompatActivity {
         builder.show();
     }
 
+    /**
+     * inserts the assignbment to the database and displays the toast message for success or failure of task insertion
+     */
     public void addAssignment(String newTaskDate, String newTaskDesc, int subjectID){
         boolean insertData = myDB.insertAssignment(newTaskDate,newTaskDesc,subjectID);
         if(insertData) {

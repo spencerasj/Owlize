@@ -6,6 +6,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * Help gather Canvas API info
+ */
 public class HTTPHelper {
     public StringBuffer readHTTP(String url, String token) {
         StringBuffer response = new StringBuffer();

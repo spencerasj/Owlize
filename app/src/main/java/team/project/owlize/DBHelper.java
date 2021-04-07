@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+/**
+ * Database class to store all the app information
+ */
 public class DBHelper extends SQLiteOpenHelper {
 
     private static final String TAG = "DBHelper";

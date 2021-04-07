@@ -1,12 +1,14 @@
 package team.project.owlize;
 
+/**
+ * Assignment class is used as the base class to pull in assignment data
+ */
 public class Assignment {
     private int id;
     private String name;
     private String date;
 
     // Constructor
-
     public Assignment(int id, String name, String date) {
         this.id = id;
         this.name = name;
@@ -14,7 +16,6 @@ public class Assignment {
     }
 
     // Setter, Getter
-
     public int getId() {
         return id;
     }

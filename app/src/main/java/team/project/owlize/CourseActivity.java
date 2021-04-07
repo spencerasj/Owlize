@@ -20,6 +20,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * The CourseActivity class is used to handle all course data in the app
+ */
 public class CourseActivity extends AppCompatActivity {
     private static final String TAG = "CourseActivity";
     private ArrayList<String> courses;
@@ -31,7 +34,9 @@ public class CourseActivity extends AppCompatActivity {
     private String selectedSubject;
     private int selectedID;
 
-
+    /**
+     * sets up the database and the course data
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,21 +48,12 @@ public class CourseActivity extends AppCompatActivity {
         courses = new ArrayList<>();
 
         populateCourseList();
-//        Log.d(TAG, "Received intent with Course");
-//        readItems();
-//        coursesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, courses);
-//        courseList.setAdapter(coursesAdapter);
-//        courseList.setOnItemClickListener((adapterView, view, i, id) -> {
-//            String course = adapterView.getItemAtPosition(i).toString();
-//            Intent assignIntent = new Intent(CourseActivity.this, AssignmentActivity.class);
-//            assignIntent.putExtra("CourseListItem", course);
-//            startActivity(assignIntent);
-//
-//        });
-//        Log.d(TAG, "Received intent with favScripture");
         longClickDelete();
     }
 
+    /**
+     * populates the course list upon page refresh/reload
+     */
     private void populateCourseList() {
         Log.d(TAG, "populateSubjectList: Displaying subjects in the ListView.");
         Cursor subjects = myDB.getAllData();
@@ -94,7 +90,9 @@ public class CourseActivity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * allows user to delete course when click is held down
+     */
     private void longClickDelete() {
         courseList.setOnItemLongClickListener(
                 (adapter, item, pos, id) -> {
@@ -106,6 +104,9 @@ public class CourseActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * gets course info from user via editText and checks to make sure course name has a length
+     */
     public void addCourse(View view) {
         course = findViewById(R.id.courseNameEditText);
         String courseName = course.getText().toString();
@@ -119,13 +120,16 @@ public class CourseActivity extends AppCompatActivity {
         course.setText("");
     }
 
+    /**
+     * Prompt to enter the course name upon course add
+     */
     public void toastMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-//    public void receiveCourse(View view) {
-//
-
+    /**
+     * adds course data to the database
+     */
     public void AddData(String subjEntry){
         myDB.insertCourse(subjEntry);
     }
